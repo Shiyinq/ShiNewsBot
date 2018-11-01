@@ -1,7 +1,7 @@
 schema: kata.ai/schema/kata-ml/1.0
 name: ShiNewsBot
 desc: My First Bot
-version: 0.0.38
+version: 0.0.44
 flows:
     opening: $include(brain/opening.yml)
     main: $include(brain/main.yml)
