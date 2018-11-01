@@ -55,8 +55,8 @@ actions:
       data: $(payload.res_newsapi)
       type: carousel
       template:
-        text: '$[description]  '
-        title: '$[title]  '
+        text: '$[description] '
+        title: '$[title]'
         thumbnailImageUrl: '$[urlToImage]'
         actions:
           - type: url
