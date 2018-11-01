@@ -1,0 +1,6 @@
+intent:
+  type: keyword
+  options:
+    keywords:
+      news:
+        - berita

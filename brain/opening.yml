@@ -1,0 +1,83 @@
+# opening
+intents:
+  # intent opening telegram
+  intent_opening_line:
+    type: data
+    initial: true
+    condition: payload.type == "follow"
+  intent_opening_telegram:
+    type: text 
+    initial: true
+    condition: content == "/start"
+  intent_menu:
+    type: text
+    initial: true
+    classifier:
+      nlu: intent
+      match: menus
+# states
+states:
+  state_initial:
+    initial: true
+    transitions:
+      state_opening_bot:
+        condition: intent == 'intent_opening_telegram' || intent == 'intent_opening_line' || intent == 'intent_menu'
+        mapping:
+          data:
+              userId: metadata.lineSenderId || metadata.fbmessengerSenderId || metadata.telegramSenderId || metadata.qiscusSenderId
+          context:
+              lineToken: metadata.lineAccessToken
+  state_opening_bot:
+    action: 
+      - name: opening_line
+        condition: metadata.channelType == 'line'
+      - name: opening_text
+        condition: metadata.channelType == 'telegram' || metadata.channelType == 'line'
+      - name: opening_text1
+      - name: opening_text2
+    end: true
+# actions
+actions:
+  opening_line:
+    type: api
+    options:
+      method: GET
+      headers:
+          Authorization: Bearer $(context.lineToken)
+      uri: 'https://api.line.me/v2/bot/profile/$(data.userId)'
+  opening_text:
+    type: text
+    options:
+      text: 
+        -  Hai $(metadata.qiscusSenderName)$(result.displayName)$(result.name)$(metadata.telegramSenderName), saya adalah Shi, bot yang dapat menampilkan berita
+        -  Hallo  $(metadata.qiscusSenderName)$(result.displayName)$(result.name)$(metadata.telegramSenderName), saya adalah Shi, bot yang dapat menampilkan berita
+  opening_text1:
+    type: text
+    options:
+      text:
+        - Saya bisa membantu anda mencari berita
+  opening_text2:
+    type: text
+    options:
+      text:
+        - Jangan sungkan, tanyakan saja kepada saya ;)
+  opening_menus_line:
+    type: template
+    options:
+      type: carousel
+      items:
+        - title: Biodata
+          text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          thumbnailImageUrl: 'https://ak0.picdn.net/shutterstock/videos/18451300/thumb/1.jpg'
+          actions:
+            - type: postback
+              label: Bio
+              payload:
+                menu: biodata
+        - title: Buy Ticket
+          text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          thumbnailImageUrl: 'https://rainbowsend.co.nz/imgs/arrow-buy-tickets-orange.png'
+          actions:
+            - type: url
+              label: Ticket
+              url: 'https://www.google.com/'

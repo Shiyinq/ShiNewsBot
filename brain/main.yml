@@ -1,0 +1,69 @@
+intents:
+  intent_initial:
+    initial: true
+    classifier:
+      nlu: intent
+      match: news
+  intent_fallback_api:
+    type: command
+    condition: content == 'call_api_fallback'
+states:
+  state_initial:
+    initial: true
+    transitions:
+      state_hit_newsapi:
+        condition: intent == "intent_initial"
+  state_hit_newsapi:
+    action:
+      - name: act_hit_newsapi
+      - name: command
+        options:
+          command: call_api_fallback
+          payload:
+            res_newsapi: $(result.articles)
+    transitions:
+      state_get_news:
+        condition: 'payload.res_newsapi'
+        mapping:
+          context:
+            data: 'payload.res_newsapi'
+      state_error_get_news:
+        condition: '!payload.res_newsapi'
+  state_get_news:
+    action:
+      - name: act_text_first
+      - name: act_news_card
+    end: true
+  state_error_get_news:
+    action:
+      - name: act_error_get_news
+    end: true
+actions:
+  act_hit_newsapi:
+    type: api
+    options:
+      method: GET
+      uri: 'https://newsapi.org/v2/top-headlines?country=id&category=technology&pageSize=2&apiKey=7ae50f6e7ef34be8a61b6acbe7e2de3e'
+  act_text_first:
+    type: text
+    options:
+      text:
+        - Ini berita hari ini
+  act_news_card:
+    type: template
+    options:
+      data: $(payload.res_newsapi)
+      type: carousel
+      template:
+        text: '$[description]'
+        title: '$[title]'
+        thumbnailImageUrl: '$[urlToImage]'
+        actions:
+          - type: url
+            label: Detail
+            url: '$[url]'
+  act_error_get_news:
+    type: text
+    options:
+      text:
+        - Error
