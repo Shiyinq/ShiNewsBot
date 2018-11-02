@@ -4,6 +4,10 @@ intents:
     classifier:
       nlu: intent
       match: news
+  intent_initial_from_menu:
+    initial: true
+    type: data
+    condition: payload.topic_news == 'technology' || payload.topic_news == 'business' || payload.topic_news == 'sports' || payload.topic_news == 'health'
   intent_fallback_api:
     type: command
     condition: content == 'call_api_fallback'
@@ -12,7 +16,7 @@ states:
     initial: true
     transitions:
       state_hit_newsapi:
-        condition: intent == "intent_initial"
+        condition: intent == "intent_initial" || intent == "intent_initial_from_menu"
   state_hit_newsapi:
     action:
       - name: act_hit_newsapi
@@ -43,12 +47,13 @@ actions:
     type: api
     options:
       method: GET
-      uri: 'https://newsapi.org/v2/top-headlines?country=id&category=technology&pageSize=2&apiKey=7ae50f6e7ef34be8a61b6acbe7e2de3e'
+      uri: 'https://newsapi.org/v2/top-headlines?country=id&category=$(payload.topic_news)&pageSize=10&apiKey=7ae50f6e7ef34be8a61b6acbe7e2de3e'
   act_text_first:
     type: text
     options:
       text:
-        - Ini berita hari ini
+        - Ini berita hari ini :)
+        - Selamat membaca
   act_news_card:
     type: template
     options:
@@ -57,7 +62,7 @@ actions:
       template:
         text: '$[description] '
         title: '$[title]'
-        thumbnailImageUrl: '$[urlToImage]'
+        thumbnailImageUrl: 'https://www.ibm.com/blogs/insights-on-business/government/wp-content/uploads/sites/20/2017/06/news.jpg'
         actions:
           - type: url
             label: Detail

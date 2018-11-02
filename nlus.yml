@@ -3,4 +3,10 @@ intent:
   options:
     keywords:
       news:
+        - technology
+        - business
+        - sports
+        - health
+      menus:
+        - menu
         - berita

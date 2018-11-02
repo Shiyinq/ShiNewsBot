@@ -35,6 +35,7 @@ states:
         condition: metadata.channelType == 'telegram' || metadata.channelType == 'line'
       - name: opening_text1
       - name: opening_text2
+      - name: act_menu_news
     end: true
 # actions
 actions:
@@ -61,6 +62,43 @@ actions:
     options:
       text:
         - Jangan sungkan, tanyakan saja kepada saya ;)
+  act_menu_news:
+    type: template
+    options:
+      type: carousel
+      items:
+        - text: Berita Technology
+          title: Technology
+          thumbnailImageUrl: 'https://res.cloudinary.com/people-matters/image/upload/fl_immutable_cache,w_624,h_351,q_auto,f_auto/v1534952778/1534952660.jpg'
+          actions:
+            - type: postback
+              label: Lihat Berita
+              payload:
+                topic_news: 'technology'
+        - text: Berita Business
+          title: Business
+          thumbnailImageUrl: 'https://s3.amazonaws.com/influencive.com/wp-content/uploads/2016/11/08185308/Depositphotos_22928632_m-2015.jpg'
+          actions:
+            - type: postback
+              label: Lihat Berita
+              payload:
+                topic_news: 'business'
+        - text: Berita Sports
+          title: Sports
+          thumbnailImageUrl: 'https://i0.wp.com/olahraga.pro/wp-content/uploads/2016/09/olahraga-sepak-bola.jpg'
+          actions:
+            - type: postback
+              label: Lihat Berita
+              payload:
+                topic_news: 'sports'
+        - text: Berita Health
+          title: Health
+          thumbnailImageUrl: 'https://adaderanaenglish.s3.amazonaws.com/1528307634-health-science-mandatory-subject-5.jpg'
+          actions:
+            - type: postback
+              label: Lihat Berita
+              payload:
+                topic_news: 'health'
   opening_menus_line:
     type: template
     options:
