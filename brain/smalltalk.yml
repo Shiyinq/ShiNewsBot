@@ -4,7 +4,13 @@ intents:
     type: text
     classifier:
       nlu: nl_shinewsbot
-      expression: snb_smalltalk == 'kamusiapa'
+      expression: snb_smalltalk == "kamusiapa"
+  intent_terimakasih:
+    initial: true
+    type: text
+    classifier:
+      nlu: nl_shinewsbot
+      expression: snb_smalltalk == "terimakasih"
   intent_greet_pagi:
     initial: true
     type: text
@@ -35,6 +41,8 @@ states:
     transitions:
       state_kamu_siapa:
         condition: intent == 'intent_kamu_siapa'
+      state_terimakasih:
+        condition: intent == 'intent_terimakasih'
       state_greet_pagi:
         condition: intent == 'intent_greet_pagi'
       state_greet_siang:
@@ -46,6 +54,10 @@ states:
   state_kamu_siapa:
     action:
       - name: act_kamu_siapa
+    end: true
+  state_terimakasih:
+    action:
+      - name: act_terimakasih
     end: true
   state_greet_pagi:
     action:
@@ -71,6 +83,13 @@ actions:
         - Saya adalah bot
         - Saya teman mu
         - Hmm siapa ya
+  act_terimakasih:
+    type: text
+    options:
+      text:
+        - Terimakasih kembali..
+        - Sama sama
+        - Senang bisa membantu
   act_greet_pagi:
     type: text
     options:

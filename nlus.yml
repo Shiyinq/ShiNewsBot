@@ -17,6 +17,5 @@ intent:
       menus:
         - menu
         - berita
-        - pagi
       greet:
         - pagi
