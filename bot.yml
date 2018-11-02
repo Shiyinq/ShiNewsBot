@@ -2,7 +2,7 @@ id: 28ccc44f-8300-4626-a791-7507351926c6
 schema: kata.ai/schema/kata-ml/1.0
 name: ShiNewsBot
 desc: My First Bot
-version: 0.0.75
+version: 0.0.87
 flows:
     opening: $include(brain/opening.yml)
     main: $include(brain/main.yml)

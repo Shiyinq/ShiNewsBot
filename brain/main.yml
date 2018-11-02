@@ -37,6 +37,7 @@ states:
     action:
       - name: act_text_first
       - name: act_news_card
+      - name: act_button_menu
     end: true
   state_error_get_news:
     action:
@@ -52,7 +53,6 @@ actions:
     type: text
     options:
       text:
-        - Ini berita hari ini :)
         - Selamat membaca
   act_news_card:
     type: template
@@ -67,6 +67,17 @@ actions:
           - type: url
             label: Detail
             url: '$[url]'
+  act_button_menu:
+    type: template
+    options:
+      type: button
+      items:
+        text: Menu
+        actions:
+          - type: 'postback'
+            label: Lihat Menu
+            payload:
+              call_menu: 'menu'
   act_error_get_news:
     type: text
     options:

@@ -15,18 +15,24 @@ intents:
     classifier:
       nlu: intent
       match: menus
+  intent_menu_payload:
+    initial: true
+    type: data
+    condition: payload.call_menu == 'menu'
 # states
 states:
   state_initial:
     initial: true
     transitions:
       state_opening_bot:
-        condition: intent == 'intent_opening_telegram' || intent == 'intent_opening_line' || intent == 'intent_menu'
+        condition: intent == 'intent_opening_telegram' || intent == 'intent_opening_line'
         mapping:
           data:
               userId: metadata.lineSenderId || metadata.fbmessengerSenderId || metadata.telegramSenderId || metadata.qiscusSenderId
           context:
               lineToken: metadata.lineAccessToken
+      state_single_menu:
+        condition: intent == 'intent_menu' || intent == 'intent_menu_payload'
   state_opening_bot:
     action: 
       - name: opening_line
@@ -34,7 +40,11 @@ states:
       - name: opening_text
         condition: metadata.channelType == 'telegram' || metadata.channelType == 'line'
       - name: opening_text1
-      - name: opening_text2
+      - name: act_menu_news
+        condition: metadata.channelType == 'line'
+    end: true
+  state_single_menu:
+    action:
       - name: act_menu_news
     end: true
 # actions
@@ -56,12 +66,12 @@ actions:
     type: text
     options:
       text:
-        - Saya bisa membantu anda mencari berita
+        - Saya bisa membantu anda menampilkan berita terbaru
   opening_text2:
     type: text
     options:
       text:
-        - Jangan sungkan, tanyakan saja kepada saya ;)
+        - Berita
   act_menu_news:
     type: template
     options:
@@ -99,23 +109,3 @@ actions:
               label: Lihat Berita
               payload:
                 topic_news: 'health'
-  opening_menus_line:
-    type: template
-    options:
-      type: carousel
-      items:
-        - title: Biodata
-          text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          thumbnailImageUrl: 'https://ak0.picdn.net/shutterstock/videos/18451300/thumb/1.jpg'
-          actions:
-            - type: postback
-              label: Bio
-              payload:
-                menu: biodata
-        - title: Buy Ticket
-          text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          thumbnailImageUrl: 'https://rainbowsend.co.nz/imgs/arrow-buy-tickets-orange.png'
-          actions:
-            - type: url
-              label: Ticket
-              url: 'https://www.google.com/'
