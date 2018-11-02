@@ -11,6 +11,12 @@ intents:
     classifier:
       nlu: nl_shinewsbot
       expression: snb_smalltalk == "terimakasih"
+  intent_maaf:
+    initial: true
+    type: text
+    classifier:
+      nlu: nl_shinewsbot
+      expression: snb_smalltalk == "maaf"
   intent_greet_pagi:
     initial: true
     type: text
@@ -43,6 +49,8 @@ states:
         condition: intent == 'intent_kamu_siapa'
       state_terimakasih:
         condition: intent == 'intent_terimakasih'
+      state_maaf:
+        condition: intent == 'intent_maaf'
       state_greet_pagi:
         condition: intent == 'intent_greet_pagi'
       state_greet_siang:
@@ -58,6 +66,10 @@ states:
   state_terimakasih:
     action:
       - name: act_terimakasih
+    end: true
+  state_maaf:
+    action:
+      - name: act_maaf
     end: true
   state_greet_pagi:
     action:
@@ -90,6 +102,13 @@ actions:
         - Terimakasih kembali..
         - Sama sama
         - Senang bisa membantu
+  act_maaf:
+    type: text
+    options:
+      text: 
+        - Iya aku maafin
+        - Iya santai ja
+        - Don't mind :)
   act_greet_pagi:
     type: text
     options:
