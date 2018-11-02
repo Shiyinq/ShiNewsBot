@@ -1,3 +1,10 @@
+nl_shinewsbot:
+  type: nl
+  options:
+    nluId: 'Shiyinq:nl_shinewsbot'
+    threshold: 0.5
+    output: value
+    flatten: true
 intent:
   type: keyword
   options:
@@ -10,3 +17,6 @@ intent:
       menus:
         - menu
         - berita
+        - pagi
+      greet:
+        - pagi
