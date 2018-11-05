@@ -16,10 +16,18 @@ states:
         end: true
         action:
             - name: act_fallback
+            - name: act_send_sticker
 actions:
     act_fallback:
         type: text
         options:
             text:
                 - Maaf saya belum mengerti kalimat itu, akan saya catat dulu
+    act_send_sticker:
+        type: template
+        options:
+            type: sticker
+            items:
+                stickerId: '13'
+                packageId: '1'
 methods: {}
