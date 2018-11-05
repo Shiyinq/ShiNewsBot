@@ -47,6 +47,7 @@ states:
   state_save:
     action:
       - name: act_save
+      - name: act_send_sticker
     end: true
 actions:
   act_ask:
@@ -80,3 +81,10 @@ actions:
     options:
       text:
         - "Data anda telah disimpan \n--------------------- \nNama: $(context.data_user.detect_nama) \nEmail: $(context.data_user.detect_email) \nNo Hp: $(context.data_user.detect_no_hp)"
+  act_send_sticker:
+    type: template
+    options:
+      type: sticker
+      items:
+        stickerId: '13'
+        packageId: '1'
