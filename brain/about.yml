@@ -11,6 +11,7 @@ states:
     transitions:
       state_contact:
         condition: intent == 'intent_initial'
+        fallback: true
   state_contact:
     action:
       - name: act_text
