@@ -19,3 +19,17 @@ intent:
         - berita
       greet:
         - pagi
+# test detect_nl
+getdata:
+  type: nl
+  options:
+    nluId: 'Shiyinq:test_detect'
+    treshold: 0.5
+    output: value
+    flatten: true
+getdata_triger:
+  type: keyword
+  options:
+    keywords:
+      get_data: 
+        - simpan data
