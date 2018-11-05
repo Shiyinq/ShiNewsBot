@@ -1,0 +1,43 @@
+intents:
+  intent_inital:
+    initial: true
+    type: text
+    condition: content == 'generate text'
+  intent_get_text:
+    type: text
+states:
+  state_initial:
+    initial: true
+    fallback: true
+    transitions:
+      state_text:
+        condition: intent == 'intent_inital'
+  state_text:
+    action:
+      - name: act_text
+    transitions:
+      state_generate_qrcode:
+        condition: intent == 'intent_get_text'
+      state_text:
+        fallback: true
+  state_generate_qrcode:
+    action:
+      - name: act_text2
+      - name: act_send_qrcode
+    end: true
+actions:
+  act_text:
+    type: text
+    options:
+      text: Silahkan masukan kalimat/kata yang ingin dirubah ke QRCode
+  act_text2:
+    type: text
+    options:
+      text: Ini hasilnya..
+  act_send_qrcode:
+    type: 'template'
+    options:
+      type: 'image'
+      items:
+        originalContentUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$(content)'
+        previewImageUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$(content)'
