@@ -1,0 +1,41 @@
+intents:
+  intent_initial:
+    type: text
+    initial: true
+    classifier:
+      nlu: about
+      match: about_triger
+states:
+  state_initial:
+    initial: true
+    transitions:
+      state_contact:
+        condition: intent == 'intent_initial'
+  state_contact:
+    action:
+      - name: act_text
+      - name: act_contact_btn
+    end: true
+actions:
+  act_text:
+    type: text
+    options:
+      text:
+        - Bot ini di kembangkan oleh @Shiyinq
+  act_contact_btn:
+    type: template
+    options:
+      type: button
+      items:
+        text: Contact yang dapat dihubungi
+        title: Contact
+        actions:
+          - type: url
+            label: Telegram
+            url: 'https://t.me/Shiyinq'
+          - type: url
+            label: Gmail
+            url: 'mailto:test@gmail.com'
+          - type: url
+            label: No Hp
+            url: 'tel:08974812345'

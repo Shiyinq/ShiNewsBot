@@ -19,6 +19,12 @@ intent:
         - berita
       greet:
         - pagi
+about:
+  type: keyword
+  options:
+    keywords:
+      about_triger:
+        - about
 # test detect_nl
 getdata:
   type: nl
