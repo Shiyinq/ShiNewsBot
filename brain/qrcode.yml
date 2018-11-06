@@ -2,7 +2,7 @@ intents:
   intent_inital:
     initial: true
     type: text
-    condition: content == 'generate text'
+    condition: content == 'qrcode'
   intent_get_text:
     type: text
 states:
@@ -18,6 +18,7 @@ states:
     transitions:
       state_generate_qrcode:
         condition: intent == 'intent_get_text'
+        mapping: textToUrl
       state_text:
         fallback: true
   state_generate_qrcode:
@@ -39,5 +40,11 @@ actions:
     options:
       type: 'image'
       items:
-        originalContentUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$(content)'
-        previewImageUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$(content)'
+        originalContentUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$(context.data_text)'
+        previewImageUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$(context.data_text)'
+methods:
+  textToUrl(ctx): "
+    let text = ctx.content;
+    ctx.context.data_text = text.replace(/ /g,'%20');
+    return ctx;   
+  "

@@ -2,7 +2,7 @@ id: 28ccc44f-8300-4626-a791-7507351926c6
 schema: kata.ai/schema/kata-ml/1.0
 name: ShiNewsBot
 desc: Bot Berita - Latihan membuat bot
-version: 0.0.157
+version: 0.0.249
 flows:
     smalltalk: $include(brain/smalltalk.yml)
     opening: $include(brain/opening.yml)
