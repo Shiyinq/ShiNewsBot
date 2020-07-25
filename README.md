@@ -1,3 +1,3 @@
 # ShiNewsBot
-Bot berita, build with kata.ai
+Bot berita, build with kata-cli
 
