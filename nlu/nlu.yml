@@ -1,0 +1,16 @@
+name: nl_shinewsbot
+lang: ID
+visibility: public
+entities:
+  snb_smalltalk:
+    type: trait
+    profile: default
+    labels:
+      - pagi
+      - siang
+      - sore
+      - malam
+      - kamusiapa
+      - apakabar
+      - terimakasih
+      - maaf

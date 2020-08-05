@@ -1,18 +1,13 @@
-id: 28ccc44f-8300-4626-a791-7507351926c6
-schema: kata.ai/schema/kata-ml/1.0
 name: ShiNewsBot
-desc: Bot Berita - Latihan membuat bot
-version: 0.0.249
+desc: Bot Berita
 flows:
     smalltalk: $include(flow/smalltalk.yml)
     opening: $include(flow/opening.yml)
     main: $include(flow/main.yml)
     qrcode: $include(flow/qrcode.yml)
     about: $include(flow/about.yml)
-    getdata: $include(flow/getdata.yml)
     fallback: $include(flow/fallback.yml)
 nlus: $include(nlus.yml)
 methods: {}
-config:
-    maxRecursion: 10
+config: $include(config.yml)
 tag: null

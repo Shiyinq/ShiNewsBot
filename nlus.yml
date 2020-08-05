@@ -33,9 +33,3 @@ getdata:
     treshold: 0.5
     output: value
     flatten: true
-getdata_triger:
-  type: keyword
-  options:
-    keywords:
-      get_data: 
-        - simpan data
