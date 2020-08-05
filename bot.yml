@@ -4,13 +4,13 @@ name: ShiNewsBot
 desc: Bot Berita - Latihan membuat bot
 version: 0.0.249
 flows:
-    smalltalk: $include(brain/smalltalk.yml)
-    opening: $include(brain/opening.yml)
-    main: $include(brain/main.yml)
-    qrcode: $include(brain/qrcode.yml)
-    about: $include(brain/about.yml)
-    getdata: $include(brain/getdata.yml)
-    fallback: $include(brain/fallback.yml)
+    smalltalk: $include(flow/smalltalk.yml)
+    opening: $include(flow/opening.yml)
+    main: $include(flow/main.yml)
+    qrcode: $include(flow/qrcode.yml)
+    about: $include(flow/about.yml)
+    getdata: $include(flow/getdata.yml)
+    fallback: $include(flow/fallback.yml)
 nlus: $include(nlus.yml)
 methods: {}
 config:
