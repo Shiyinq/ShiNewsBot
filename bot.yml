@@ -3,7 +3,7 @@ desc: Bot Berita
 flows:
     smalltalk: $include(flow/smalltalk.yml)
     opening: $include(flow/opening.yml)
-    main: $include(flow/main.yml)
+    fetch_news: $include(flow/fetch_news.yml)
     qrcode: $include(flow/qrcode.yml)
     about: $include(flow/about.yml)
     fallback: $include(flow/fallback.yml)

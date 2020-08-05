@@ -48,7 +48,7 @@ actions:
     type: api
     options:
       method: GET
-      uri: 'https://newsapi.org/v2/top-headlines?country=id&category=$(payload.topic_news)&pageSize=10&apiKey=7ae50f6e7ef34be8a61b6acbe7e2de3e'
+      uri: 'https://newsapi.org/v2/top-headlines?country=id&category=$(payload.topic_news)&pageSize=10&apiKey=$(config.newsAPIKey)'
   act_text_first:
     type: text
     options:
